@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Car Workshop Appointment</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2>Book an Appointment</h2>
+  <form id="appointmentForm" action="insert.php" method="POST">
+    <input type="text" name="client_name" placeholder="Your Name" required><br>
+
+    <input type="text" name="address" placeholder="Address" required><br>
+
+    <input type="tel" name="phone" placeholder="Phone" 
+           pattern="(\+88)?01[3-9]\d{8}" 
+           title="Enter a valid BD number like 01712345678 or +8801712345678" 
+           required><br>
+
+    <input type="text" name="car_license" placeholder="Car License No" 
+           pattern="[A-Z]{3}-\d{4}" 
+           title="Format: ABC-1234" 
+           required><br>
+
+    <input type="text" name="engine_number" placeholder="Car Engine No" 
+           pattern="\d+" 
+           title="Only numbers allowed" 
+           required><br>
+
+    <input type="date" name="appointment_date" required><br>
+
+    <select name="mechanic_id" required>
+      <option value="">-- Select Mechanic --</option>
+      <option value="1">Mr. Karim</option>
+      <option value="2">Mr. Rahim</option>
+      <option value="3">Mr. Salim</option>
+      <option value="4">Mr. Babu</option>
+      <option value="5">Mr. Anis</option>
+    </select><br>
+
+    <button type="submit">Book Appointment</button>
+  </form>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
