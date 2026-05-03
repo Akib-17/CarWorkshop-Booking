@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoFix — Admin Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="admin-body">
+
+  <div class="bg-grid"></div>
+  <div class="bg-noise"></div>
+
+  <header class="site-header">
+    <div class="logo-block">
+      <span class="logo-icon">⚙</span>
+      <div>
+        <div class="logo-name">AUTOFIX</div>
+        <div class="logo-tagline">Admin Dashboard</div>
+      </div>
+    </div>
+    <nav class="header-nav">
+      <a href="/" class="nav-link">← Book</a>
+      <a href="/admin" class="nav-link active">Admin</a>
+    </nav>
+  </header>
+
+  <main class="admin-main">
+
+    <!-- Stats Bar -->
+    <div class="admin-stats" id="adminStats">
+      <div class="admin-stat-card">
+        <div class="stat-val" id="stat-total">—</div>
+        <div class="stat-key">Total Bookings</div>
+      </div>
+      <div class="admin-stat-card">
+        <div class="stat-val" id="stat-today">—</div>
+        <div class="stat-key">Today</div>
+      </div>
+      <div class="admin-stat-card">
+        <div class="stat-val" id="stat-pending">—</div>
+        <div class="stat-key">Pending</div>
+      </div>
+      <div class="admin-stat-card">
+        <div class="stat-val" id="stat-done">—</div>
+        <div class="stat-key">Completed</div>
+      </div>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="admin-toolbar">
+      <div class="toolbar-title">// APPOINTMENTS</div>
+      <div class="toolbar-actions">
+        <input type="text" id="searchInput" class="search-input" placeholder="Search client, car…" oninput="filterTable()">
+        <select id="statusFilter" class="filter-select" onchange="filterTable()">
+          <option value="">All Status</option>
+          <option value="pending">Pending</option>
+          <option value="completed">Completed</option>
+          <option value="cancelled">Cancelled</option>
+        </select>
+        <button class="btn-refresh" onclick="loadAppointments()">↻ Refresh</button>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="table-wrap">
+      <table class="admin-table" id="appointmentsTable">
+        <thead>
+          <tr>
+            <th>Client</th>
+            <th>Phone</th>
+            <th>Car License</th>
+            <th>Engine #</th>
+            <th>Date</th>
+            <th>Mechanic</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          <tr><td colspan="8" class="loading-cell">Loading appointments…</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="modal-overlay" id="editModal" style="display:none">
+      <div class="modal">
+        <div class="modal-header">
+          <h3>Edit Appointment</h3>
+          <button class="modal-close" onclick="closeModal()">✕</button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" id="edit_id">
+
+          <div class="field-group">
+            <label class="modal-label">Date</label>
+            <input type="date" id="edit_date" class="modal-input">
+          </div>
+
+          <div class="field-group">
+            <label class="modal-label">Mechanic</label>
+            <select id="edit_mechanic" class="modal-input">
+              <option value="1">Mr. Karim</option>
+              <option value="2">Mr. Rahim</option>
+              <option value="3">Mr. Salim</option>
+              <option value="4">Mr. Babu</option>
+              <option value="5">Mr. Anis</option>
+            </select>
+          </div>
+
+          <div class="field-group">
+            <label class="modal-label">Status</label>
+            <select id="edit_status" class="modal-input">
+              <option value="pending">Pending</option>
+              <option value="completed">Completed</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-back" onclick="closeModal()">Cancel</button>
+          <button class="btn-submit" onclick="saveEdit()">Save Changes</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span class="logo-name small">AUTOFIX ADMIN</span>
+      <span id="lastRefresh"></span>
+    </div>
+  </footer>
+
+  <script src="admin.js"></script>
+</body>
+</html>

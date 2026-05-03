@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoFix Workshop — Book Appointment</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;700&family=Libre+Baskerville:ital@1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Animated background grid -->
+  <div class="bg-grid"></div>
+  <div class="bg-noise"></div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="logo-block">
+      <span class="logo-icon">⚙</span>
+      <div>
+        <div class="logo-name">AUTOFIX</div>
+        <div class="logo-tagline">Workshop & Service Center</div>
+      </div>
+    </div>
+    <nav class="header-nav">
+      <a href="/" class="nav-link active">Book</a>
+      <a href="/admin" class="nav-link">Admin Panel</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-label">DHAKA'S TRUSTED AUTO SERVICE</div>
+    <h1 class="hero-title">
+      <span class="word-animate">Schedule</span>
+      <span class="word-animate delay-1"><em>Your</em></span>
+      <span class="word-animate delay-2">Appointment</span>
+    </h1>
+    <p class="hero-sub">Expert mechanics. Same-day diagnostics. Zero surprises.</p>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num">5</span><span class="stat-label">Mechanics</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat"><span class="stat-num">4</span><span class="stat-label">Slots/Day</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat"><span class="stat-num">24h</span><span class="stat-label">Advance</span></div>
+    </div>
+  </section>
+
+  <!-- Booking Form -->
+  <main class="form-section">
+    <div class="form-container">
+      <div class="form-header">
+        <div class="form-step-indicator">
+          <div class="step active" id="step-dot-1"><span>01</span></div>
+          <div class="step-line"></div>
+          <div class="step" id="step-dot-2"><span>02</span></div>
+          <div class="step-line"></div>
+          <div class="step" id="step-dot-3"><span>03</span></div>
+        </div>
+        <h2 class="form-title">New Appointment</h2>
+      </div>
+
+      <form id="bookingForm" novalidate>
+
+        <!-- Step 1: Personal Info -->
+        <div class="form-page active" data-step="1">
+          <div class="section-label">// CLIENT INFORMATION</div>
+
+          <div class="field-group">
+            <div class="field floating">
+              <input type="text" id="client_name" name="client_name" required autocomplete="off">
+              <label for="client_name">Full Name</label>
+              <span class="field-icon">👤</span>
+              <div class="field-line"></div>
+            </div>
+            <div class="field-error" id="err-client_name"></div>
+          </div>
+
+          <div class="field-group">
+            <div class="field floating">
+              <input type="text" id="address" name="address" required autocomplete="off">
+              <label for="address">Address</label>
+              <span class="field-icon">📍</span>
+              <div class="field-line"></div>
+            </div>
+            <div class="field-error" id="err-address"></div>
+          </div>
+
+          <div class="field-group">
+            <div class="field floating">
+              <input type="tel" id="phone" name="phone"
+                pattern="(\+88)?01[3-9]\d{8}"
+                placeholder=" "
+                required autocomplete="off">
+              <label for="phone">Phone Number</label>
+              <span class="field-icon">📞</span>
+              <div class="field-line"></div>
+            </div>
+            <div class="field-hint">Format: 01712345678 or +8801712345678</div>
+            <div class="field-error" id="err-phone"></div>
+          </div>
+
+          <button type="button" class="btn-next" onclick="nextStep(1)">
+            Continue <span class="btn-arrow">→</span>
+          </button>
+        </div>
+
+        <!-- Step 2: Vehicle Info -->
+        <div class="form-page" data-step="2">
+          <div class="section-label">// VEHICLE DETAILS</div>
+
+          <div class="field-group">
+            <div class="field floating">
+              <input type="text" id="car_license" name="car_license"
+                pattern="[A-Z]{3}-\d{4}"
+                required autocomplete="off"
+                style="text-transform: uppercase;">
+              <label for="car_license">Car License Plate</label>
+              <span class="field-icon">🚗</span>
+              <div class="field-line"></div>
+            </div>
+            <div class="field-hint">Format: ABC-1234</div>
+            <div class="field-error" id="err-car_license"></div>
+          </div>
+
+          <div class="field-group">
+            <div class="field floating">
+              <input type="text" id="engine_number" name="engine_number"
+                pattern="\d+"
+                required autocomplete="off">
+              <label for="engine_number">Engine Number</label>
+              <span class="field-icon">⚙️</span>
+              <div class="field-line"></div>
+            </div>
+            <div class="field-hint">Digits only</div>
+            <div class="field-error" id="err-engine_number"></div>
+          </div>
+
+          <div class="btn-row">
+            <button type="button" class="btn-back" onclick="prevStep(2)">← Back</button>
+            <button type="button" class="btn-next" onclick="nextStep(2)">Continue <span class="btn-arrow">→</span></button>
+          </div>
+        </div>
+
+        <!-- Step 3: Schedule -->
+        <div class="form-page" data-step="3">
+          <div class="section-label">// SCHEDULE & MECHANIC</div>
+
+          <div class="field-group">
+            <div class="field floating date-field">
+              <input type="date" id="appointment_date" name="appointment_date" required>
+              <label for="appointment_date" class="active-label">Appointment Date</label>
+              <span class="field-icon">📅</span>
+              <div class="field-line"></div>
+            </div>
+            <div class="field-error" id="err-appointment_date"></div>
+          </div>
+
+          <div class="field-group">
+            <div class="section-label small">SELECT YOUR MECHANIC</div>
+            <div class="mechanic-grid" id="mechanicGrid">
+              <!-- Populated by JS -->
+              <div class="mechanic-loading">Loading mechanics…</div>
+            </div>
+            <input type="hidden" id="mechanic_id" name="mechanic_id" required>
+            <div class="field-error" id="err-mechanic_id"></div>
+          </div>
+
+          <div class="btn-row">
+            <button type="button" class="btn-back" onclick="prevStep(3)">← Back</button>
+            <button type="submit" class="btn-submit" id="submitBtn">
+              <span class="btn-text">Confirm Booking</span>
+              <span class="btn-spinner" style="display:none">⏳</span>
+            </button>
+          </div>
+        </div>
+
+      </form>
+
+      <!-- Success state -->
+      <div class="success-card" id="successCard" style="display:none">
+        <div class="success-icon">✓</div>
+        <h3>Booking Confirmed!</h3>
+        <p id="successMsg"></p>
+        <button class="btn-next" onclick="resetForm()">Book Another →</button>
+      </div>
+
+    </div><!-- /form-container -->
+
+    <!-- Side panel -->
+    <aside class="info-panel">
+      <div class="info-card">
+        <div class="info-icon">🔧</div>
+        <h3>Our Services</h3>
+        <ul class="service-list">
+          <li>Engine Diagnostics & Repair</li>
+          <li>Electrical Systems</li>
+          <li>Body Work & Paint</li>
+          <li>Transmission Service</li>
+          <li>Oil Change & Filters</li>
+          <li>Brake Inspection</li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <div class="info-icon">⏰</div>
+        <h3>Working Hours</h3>
+        <div class="hours-grid">
+          <span>Sat–Thu</span><span>8:00 AM – 8:00 PM</span>
+          <span>Friday</span><span>2:00 PM – 8:00 PM</span>
+        </div>
+      </div>
+
+      <div class="info-card accent-card">
+        <div class="info-icon">📞</div>
+        <h3>Emergency Line</h3>
+        <div class="phone-number">01700-AUTOFIX</div>
+      </div>
+    </aside>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span class="logo-name small">AUTOFIX</span>
+      <span>© 2026 AutoFix Workshop. All rights reserved.</span>
+      <a href="/admin" class="footer-link">Admin →</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
