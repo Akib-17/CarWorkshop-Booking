@@ -1,0 +1,312 @@
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: #d11f0b;
+  background: #1a1a1a;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(255, 140, 0, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 69, 0, 0.1) 0%, transparent 50%),
+    linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+  min-height: 100vh;
+  padding: 0;
+  position: relative;
+}
+
+/* Workshop atmosphere overlay */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 2px,
+      rgba(255, 140, 0, 0.02) 2px,
+      rgba(255, 140, 0, 0.02) 4px
+    );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Header section */
+.workshop-header {
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  color: #ecf0f1;
+  padding: 2rem 0;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 2;
+}
+
+.workshop-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.workshop-header p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  font-weight: 300;
+}
+
+/* Main content area */
+.workshop-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* Service form container */
+.service-form-container {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border-radius: 15px;
+  padding: 3rem;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  border: 2px solid #e74c3c;
+  border-top: 4px solid #ff8c00;
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.service-form-container::before {
+  content: '🔧';
+  position: absolute;
+  top: -15px;
+  left: 30px;
+  background: #e74c3c;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 50px;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+}
+
+/* Form styling */
+.service-form {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+label {
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+select,
+textarea {
+  padding: 1rem;
+  border: 2px solid #bdc3c7;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  background: #ffffff;
+  transition: all 0.3s ease;
+  color: #2c3e50;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: #e74c3c;
+  box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+  transform: translateY(-2px);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* Service type selection */
+.service-type-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.service-option {
+  position: relative;
+}
+
+.service-option input[type="radio"] {
+  display: none;
+}
+
+.service-option label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  border: 2px solid #bdc3c7;
+  border-radius: 10px;
+  background: #ffffff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  font-weight: 500;
+}
+
+.service-option label:before {
+  content: '🔧';
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.service-option:nth-child(2) label:before { content: '🛞'; }
+.service-option:nth-child(3) label:before { content: '🔋'; }
+.service-option:nth-child(4) label:before { content: '🛠️'; }
+
+.service-option input:checked + label {
+  border-color: #e74c3c;
+  background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+  color: white;
+  transform: scale(1.05);
+}
+
+/* Action buttons */
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.btn {
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+  color: white;
+  box-shadow: 0 6px 20px rgba(231, 76, 60, 0.3);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #c0392b 0%, #a93226 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(231, 76, 60, 0.4);
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+  color: white;
+  box-shadow: 0 6px 20px rgba(149, 165, 166, 0.3);
+}
+
+.btn-secondary:hover {
+  background: linear-gradient(135deg, #7f8c8d 0%, #6c7b7d 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(149, 165, 166, 0.4);
+}
+
+/* Workshop info panel */
+.workshop-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.info-card {
+  background: rgba(44, 62, 80, 0.9);
+  color: #ecf0f1;
+  padding: 2rem;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border-left: 4px solid #ff8c00;
+}
+
+.info-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: #ff8c00;
+}
+
+.info-card p {
+  opacity: 0.9;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .workshop-header h1 {
+    font-size: 2rem;
+  }
+  
+  .workshop-container {
+    padding: 2rem 1rem;
+  }
+  
+  .service-form-container {
+    padding: 2rem;
+    margin: 0 1rem;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .service-type-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+  
+  .workshop-info {
+    grid-template-columns: 1fr;
+  }
+}
